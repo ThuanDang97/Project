@@ -1,0 +1,220 @@
+{
+  "employees": [
+    {
+      "id": "NV-1",
+      "fullName": "Trần văn a",
+      "birthday": "03/06/1990",
+      "phone": "0916309250",
+      "idCard": "21257903",
+      "email": "n@gmail.com",
+      "division": {
+        "id": 1,
+        "name": "Sale-Marketing"
+      },
+      "educationDegree": {
+        "id": "1",
+        "name": "Cao đẳng"
+      },
+      "position": {
+        "id": "1",
+        "name": "Lễ tân"
+      },
+      "salary": "5000"
+    },
+    {
+      "id": "NV-1",
+      "fullName": "Trần văn a",
+      "birthday": "03/06/1990",
+      "phone": "0916309250",
+      "idCard": "21257903",
+      "email": "n@gmail.com",
+      "division": {
+        "id": 1,
+        "name": "Sale-Marketing"
+      },
+      "educationDegree": {
+        "id": "1",
+        "name": "Cao đẳng"
+      },
+      "position": {
+        "id": "1",
+        "name": "Lễ tân"
+      },
+      "salary": "5000"
+    },
+    {
+      "id": "NV-1",
+      "fullName": "Trần văn a",
+      "birthday": "03/06/1990",
+      "phone": "0916309250",
+      "idCard": "21257903",
+      "email": "n@gmail.com",
+      "division": {
+        "id": 1,
+        "name": "Sale-Marketing"
+      },
+      "educationDegree": {
+        "id": "1",
+        "name": "Cao đẳng"
+      },
+      "position": {
+        "id": "1",
+        "name": "Lễ tân"
+      },
+      "salary": "5000"
+    },
+    {
+      "id": "NV-1",
+      "fullName": "Trần văn a",
+      "birthday": "03/06/1990",
+      "phone": "0916309250",
+      "idCard": "21257903",
+      "email": "n@gmail.com",
+      "division": {
+        "id": 1,
+        "name": "Sale-Marketing"
+      },
+      "educationDegree": {
+        "id": "1",
+        "name": "Cao đẳng"
+      },
+      "position": {
+        "id": "1",
+        "name": "Lễ tân"
+      },
+      "salary": "5000"
+    },
+    {
+      "id": "NV-1",
+      "fullName": "Trần văn a",
+      "birthday": "03/06/1990",
+      "phone": "0916309250",
+      "idCard": "21257903",
+      "email": "n@gmail.com",
+      "division": {
+        "id": 1,
+        "name": "Sale-Marketing"
+      },
+      "educationDegree": {
+        "id": "1",
+        "name": "Cao đẳng"
+      },
+      "position": {
+        "id": "1",
+        "name": "Lễ tân"
+      },
+      "salary": "5000"
+    },
+    {
+      "id": "NV-1",
+      "fullName": "Trần văn a",
+      "birthday": "03/06/1990",
+      "phone": "0916309250",
+      "idCard": "21257903",
+      "email": "n@gmail.com",
+      "division": {
+        "id": 1,
+        "name": "Sale-Marketing"
+      },
+      "educationDegree": {
+        "id": "1",
+        "name": "Cao đẳng"
+      },
+      "position": {
+        "id": "1",
+        "name": "Lễ tân"
+      },
+      "salary": "5000"
+    },
+    {
+      "id": "NV-593",
+      "position": {
+        "id": 2,
+        "name": "Phục vụ"
+      },
+      "division": {
+        "id": 3,
+        "name": "Phục vụ"
+      },
+      "educationDegree": {
+        "id": 3,
+        "name": "Đại học"
+      },
+      "fullName": "testaaa",
+      "birthday": "2021-09-03",
+      "idCard": "12345678",
+      "phone": "1203232",
+      "email": "sd",
+      "salary": "000000"
+    },
+    {
+      "id": "NV-832",
+      "position": {
+        "id": 3,
+        "name": "Chuyên viên"
+      },
+      "division": {
+        "id": 3,
+        "name": "Phục vụ"
+      },
+      "educationDegree": {
+        "id": 2,
+        "name": "Cao đẳng"
+      },
+      "fullName": "nhan",
+      "birthday": "2021-09-04",
+      "idCard": "001011",
+      "phone": "01010101",
+      "email": "a@gmail.com",
+      "salary": "09162626"
+    },
+    {
+      "id": "NV-870",
+      "position": null,
+      "division": null,
+      "educationDegree": null,
+      "fullName": null,
+      "birthday": null,
+      "idCard": null,
+      "phone": null,
+      "email": null,
+      "salary": null
+    },
+    {
+      "id": "NV-634",
+      "position": null,
+      "division": null,
+      "educationDegree": null,
+      "fullName": null,
+      "birthday": null,
+      "idCard": null,
+      "phone": null,
+      "email": null,
+      "salary": null
+    },
+    {
+      "id": "NV-8",
+      "position": null,
+      "division": null,
+      "educationDegree": null,
+      "fullName": null,
+      "birthday": null,
+      "idCard": null,
+      "phone": null,
+      "email": null,
+      "salary": null
+    },
+    {
+      "id": "PfsBwKV",
+      "position": null,
+      "division": null,
+      "educationDegree": null,
+      "fullName": null,
+      "birthday": null,
+      "idCard": null,
+      "phone": null,
+      "email": null,
+      "salary": null
+    }
+  ]
+}
