@@ -1,0 +1,122 @@
+<div class="wrap-pop-up" [style]="displayChat" id="wrap-pop-up">
+  <div class="container">
+    <div class="row col-lg-12 col-sm-6 col-xl-6">
+      <div class="row" style="background: #cdd8fa; border-radius: 1rem 1rem 0 0">
+        <div class="msg-header col-lg-12 col-sm-12 col-xl-12">
+          <div class="msg-header-img">
+            <img src="assets/img/admin.png" alt="">
+          </div>
+          <div class="active-user">
+            <h4>Admin</h4>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="background: linear-gradient(120deg, #3299cc, #621818);">
+        <div class="chat-page col-lg-12 col-sm-12 col-xl-12 mt-3" style="margin: 0" id="chatPage" #chatPage
+             [scrollTop]="chatPage.scrollHeight">
+          <div *ngFor="let c of chats">
+            <div class="row received-chats" *ngIf="c.userName != roomName && c.date != yesterday && c.date != today"
+                 data-toggle="tooltip" data-placement="bottom" [title]="c.time|date:'short'">
+              <div class="received-chats-img col-sm-2 col-lg-2 col-xl-2">
+                <img src="assets/img/admin.png" alt="">
+              </div>
+              <div class="received-msg col-sm-10 col-lg-10 col-xl-10">
+                <div class="received-msg-inbox col-sm-12 col-lg-12 col-xl-12">
+                  <p class="text-wrap message">{{c.message}}</p>
+                </div>
+                <div class="row col-sm-12 col-lg-12 col-xl-12">
+                  <div class="received-time text-white small">{{c.time | date : 'short'}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="row outgoing-chats" *ngIf="c.userName == roomName && c.date != yesterday && c.date != today"
+                 data-toggle="tooltip" data-placement="bottom" [title]="c.time|date:'short'">
+              <div class="outgoing-chats-msg col-sm-12 col-lg-12 col-xl-12">
+                <p class="text-wrap message">{{c.message}}</p>
+              </div>
+              <div class="outgoing-chats-msg col-sm-12 col-lg-12 col-xl-12">
+                <div class="time text-white small">{{c.time| date:'short'}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center text-white" *ngIf="checkYesterday">Hôm qua,{{yesterday}}</div>
+          <div *ngFor="let c of chats">
+            <div class="row received-chats" *ngIf="c.userName != roomName && c.date == yesterday"
+                 data-toggle="tooltip" data-placement="bottom" [title]="c.time|date:'short'">
+              <div class="received-chats-img col-sm-2 col-lg-2 col-xl-2">
+                <img src="assets/img/admin.png" alt="">
+              </div>
+              <div class="received-msg col-sm-10 col-lg-10 col-xl-10">
+                <div class="received-msg-inbox col-sm-12 col-lg-12 col-xl-12">
+                  <p class="text-wrap message">{{c.message}}</p>
+                </div>
+                <div class="row col-sm-12 col-lg-12 col-xl-12">
+                  <div class="received-time text-white small">{{c.time | date : 'shortTime'}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="row outgoing-chats" *ngIf="c.userName == roomName && c.date == yesterday"
+                 data-toggle="tooltip" data-placement="bottom" [title]="c.time|date:'short'">
+              <div class="outgoing-chats-msg col-sm-12 col-lg-12 col-xl-12">
+                <p class="text-wrap message">{{c.message}}</p>
+              </div>
+              <div class="outgoing-chats-msg col-sm-12 col-lg-12 col-xl-12">
+                <div class="time text-white small">{{c.time| date:'shortTime'}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center text-white" *ngIf="checkToday">Hôm nay,{{today}}</div>
+          <div *ngFor="let c of chats">
+            <div class="row received-chats" *ngIf="c.userName != roomName && c.date == today"
+                 data-toggle="tooltip" data-placement="bottom" [title]="c.time|date:'short'">
+              <div class="received-chats-img col-sm-2 col-lg-2 col-xl-2">
+                <img src="assets/img/admin.png" alt="">
+              </div>
+              <div class="received-msg col-sm-10 col-lg-10 col-xl-10">
+                <div class="received-msg-inbox col-sm-12 col-lg-12 col-xl-12">
+                  <p class="text-wrap message">{{c.message}}</p>
+                </div>
+                <div class="row col-sm-12 col-lg-12 col-xl-12">
+                  <div class="received-time text-white small">{{c.time | date : 'shortTime'}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="row outgoing-chats" *ngIf="c.userName == roomName && c.date == today"
+                 data-toggle="tooltip" data-placement="bottom" [title]="c.time|date:'short'">
+              <div class="outgoing-chats-msg col-sm-12 col-lg-12 col-xl-12">
+                <p class="text-wrap message">{{c.message}}</p>
+              </div>
+              <div class="outgoing-chats-msg col-sm-12 col-lg-12 col-xl-12">
+                <div class="time text-white small">{{c.time| date:'shortTime'}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <emoji-mart class="emoji-mart pop-up-emoji" set="twitter" *ngIf="showEmojiPicker"
+                  (emojiSelect)="addEmoji($event)" title="Pick your emoji…"
+                  ></emoji-mart>
+      <div class="row" style="background: linear-gradient(120deg, #3299cc, #621818);">
+        <div class="msg-header mt-2 col-lg-12 col-sm-12 col-xl-12">
+          <form class="row input-group" [formGroup]="chatForm" (ngSubmit)="onsubmit()">
+            <a class="icon-emoji" (click) ="toggleEmojiPicker()"><fa-icon [icon]="faSmileBean"></fa-icon></a>
+            <div class="input-msg col-sm-11 col-lg-11 col-xl-11">
+              <input style="padding-left:40px" formControlName="message" id="message" type="text" class="form-control"
+                     placeholder="Nhập vào tin nhắn của bạn..."
+                     (change)="changeMess($event)" (blur)="onBlur()" (focus)="onFocus()"
+                     name="message" [(ngModel)]="message">
+            </div>
+            <div class="col-sm-1 col-lg-1 col-xl-1 text-center" style="padding: 0 5px 0 0">
+              <button type="submit" class="btn icon-send">
+                <fa-icon [icon]="faPaperPlane"></fa-icon>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="icon-pop-up" (click)="displayChatBox()">
+  <fa-icon [icon]="faFacebookMessenger"></fa-icon>
+</div>

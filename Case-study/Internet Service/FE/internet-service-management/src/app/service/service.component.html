@@ -1,0 +1,252 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-center mt-5" style="color: darkblue">DANH SÁCH DỊCH VỤ</h1>
+    </div>
+    <div class="col-md-12">
+      <form class="float-right">
+        <input type="text" class="btn btn-outline-success"
+               placeholder="search" name="searchName"/>
+        <button class="btn btn-success rounded-circle ml-2">
+          <i class="fas fa-search-plus"></i>
+        </button>
+      </form>
+    </div>
+    <div class="col-md-12">
+      <button class="btn btn-success" (click)="btnAddService()">
+        <i class="fas fa-plus-circle"></i> Add Service
+      </button>
+      <table class="table table-striped table-hover d-md-table w-100 mt-3" id="tableService">
+        <thead style="background-color: #96ee4d">
+        <tr>
+          <th>stt</th>
+          <th style="min-width: 110px">service Id<sup *ngIf="!btnAddHidden" class="text-danger">*</sup></th>
+          <th style="min-width: 150px">service name<sup *ngIf="!btnAddHidden || !btnEditHidden" class="text-danger">*</sup></th>
+          <th style="min-width: 120px">quantity<sup *ngIf="!btnAddHidden || !btnEditHidden" class="text-danger">*</sup></th>
+          <th style="min-width: 120px">unit<sup *ngIf="!btnAddHidden || !btnEditHidden" class="text-danger">*</sup></th>
+          <th style="min-width: 120px">prices<sup *ngIf="!btnAddHidden || !btnEditHidden" class="text-danger">*</sup></th>
+          <th style="min-width: 105px">action</th>
+        </tr>
+        </thead>
+        <!-- for case default -->
+        <tbody *ngIf="btnAddHidden == btnEditHidden">
+        <tr *ngFor="let service of serviceArr, index as i"
+            [id]="service.serviceId">
+          <ng-container *ngIf="serviceArrCheck[i] == service">
+            <td>{{i+1}}</td>
+            <td>
+              {{service.serviceId}}
+            </td>
+            <td>
+              {{service.serviceName}}
+            </td>
+            <td>
+              {{service.quantity}}
+            </td>
+            <td>
+              {{service.unit}}
+            </td>
+            <td>
+              {{service.prices}}
+            </td>
+            <td>
+              <button class="mr-2 border-0 btn btn-info btn-sm mx-1" (click)="btnEditService(i)">
+                <i class="fas fa-pencil-alt"></i>
+              </button>
+              <button class="btn btn-danger btn-sm mx-1">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </td>
+          </ng-container>
+        </tbody>
+
+        <!-- for case edit -->
+        <tbody *ngIf="!btnEditHidden">
+        <tr *ngFor="let service of serviceArr, index as i"
+            [id]="service.serviceId">
+          <ng-container *ngIf="serviceArrCheck[i] == service">
+            <td>{{i+1}}</td>
+            <td>
+              {{service.serviceId}}
+            </td>
+            <td>
+              {{service.serviceName}}
+            </td>
+            <td>
+              {{service.quantity}}
+            </td>
+            <td>
+              {{service.unit}}
+            </td>
+            <td>
+              {{service.prices}}
+            </td>
+            <td>
+              <button class="mr-2 border-0 btn btn-info btn-sm mx-1" (click)="btnEditService(i)">
+                <i class="fas fa-pencil-alt"></i>
+              </button>
+              <button class="btn btn-danger btn-sm mx-1">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </td>
+          </ng-container>
+          <ng-container *ngIf="serviceArrCheck[i] != service" [formGroup]="formGroupForUpdate[i]">
+            <td>{{i+1}}</td>
+            <td>
+              {{ service.serviceId }}
+            </td>
+            <td>
+              <input class="form-control" type="text" formControlName="serviceName">
+              <small class="text-danger" *ngIf="formGroupForUpdate[i].get('serviceName')?.invalid && formGroupForUpdate[i].get('serviceName')?.touched">
+                serviceName Not Null.
+              </small>
+            </td>
+            <td>
+              <input class="form-control" type="number" formControlName="quantity">
+              <small class="text-danger" *ngIf="formGroupForUpdate[i].get('quantity')?.invalid && formGroupForUpdate[i].get('quantity')?.touched">
+                The quantity must be greater than 0 and be a positive integer and Not Null.
+              </small>
+            </td>
+            <td>
+              <select class="form-control" formControlName="unit" [compareWith]="compareWith">
+                <option value="Cái">Cái</option>
+                <option value="Bao">Bao</option>
+                <option value="Chai">Chai</option>
+                <option value="Kilo">Kilo</option>
+                <option value="Đĩa">Đĩa</option>
+                <option value="Ly">Ly</option>
+              </select>
+              <small class="text-danger" *ngIf="formGroupForUpdate[i].get('unit')?.invalid && formGroupForUpdate[i].get('unit')?.touched">
+                unit Not Null.
+              </small>
+            </td>
+            <td>
+              <input class="form-control" type="number" formControlName="prices">
+              <small class="text-danger" *ngIf="formGroupForUpdate[i].get('prices')?.invalid && formGroupForUpdate[i].get('prices')?.touched">
+                price must be more than 1,000 VND and Price Not Null
+              </small>
+            </td>
+            <td>
+              <button class="btn btn-sm btn-secondary" (click)="cancelEditService(i)">
+                cancel
+              </button>
+            </td>
+          </ng-container>
+        </tr>
+        </tbody>
+
+        <!-- for case add -->
+        <tbody *ngIf="!btnAddHidden">
+        <tr *ngFor="let service of serviceArr, index as i"
+            [id]="service.serviceId">
+          <td>{{i+1}}</td>
+          <td>
+            {{service.serviceId}}
+          </td>
+          <td>
+            {{service.serviceName}}
+          </td>
+          <td>
+            {{service.quantity}}
+          </td>
+          <td>
+            {{service.unit}}
+          </td>
+          <td>
+            {{service.prices}}
+          </td>
+          <td>
+            <button class="mr-2 border-0 btn btn-info btn-sm mx-1" (click)="btnEditService(i)">
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+            <button class="btn btn-danger btn-sm mx-1">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+        <tr *ngFor="let formGroupX of formGroupForAdd, index as i" [formGroup]="formGroupX" [id]="i">
+          <td></td>
+          <td>
+            <input class="form-control" type="text" formControlName="serviceId">
+            <small class="text-danger" *ngIf="formGroupX.get('serviceId')?.invalid && formGroupX.get('serviceId')?.touched">
+              Services ID format is SVXXXX <br>
+              X is positive integer 0-9 and Not Null.
+            </small>
+          </td>
+          <td>
+            <input class="form-control" type="text" formControlName="serviceName">
+            <small class="text-danger" *ngIf="formGroupX.get('serviceName')?.invalid && formGroupX.get('serviceName')?.touched">
+              serviceName Not Null.
+            </small>
+          </td>
+          <td>
+            <input class="form-control" type="number" formControlName="quantity">
+            <small class="text-danger" *ngIf="formGroupX.get('quantity')?.invalid && formGroupX.get('quantity')?.touched">
+              The quantity must be greater than 0 and be a positive integer and Not Null.
+            </small>
+          </td>
+          <td>
+            <select class="form-control" formControlName="unit">
+              <option value="Cái">Cái</option>
+              <option value="Bao">Bao</option>
+              <option value="Chai">Chai</option>
+              <option value="Kilo">Kilo</option>
+              <option value="Đĩa">Đĩa</option>
+              <option value="Ly">Ly</option>
+            </select>
+            <small class="text-danger" *ngIf="formGroupX.get('unit')?.invalid && formGroupX.get('unit')?.touched">
+              unit Not Null.
+            </small>
+          </td>
+          <td>
+            <input class="form-control" type="number" formControlName="prices">
+            <small class="text-danger" *ngIf="formGroupX.get('prices')?.invalid && formGroupX.get('prices')?.touched">
+              price must be more than 1,000 VND and Price Not Null
+            </small>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-secondary" (click)="cancelAddService($event.target)">
+              cancel
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="col-md-12 mt-3">
+        <button class="btn btn-success float-right mx-1"
+                [disabled]="confirmHaveErr"
+                [hidden]="btnAddHidden"
+                (click)="submitAddService()">
+          Save Add
+        </button>
+        <button class="btn btn-info float-right mx-1"
+                [disabled]="confirmHaveErr"
+                [hidden]="btnEditHidden"
+                (click)="submitEditService()">
+          Save Edit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalAddOrUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Service</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center" id="contentModalAddOrUpdate">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

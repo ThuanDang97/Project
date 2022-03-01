@@ -1,0 +1,227 @@
+<main class="content">
+  <div class="container p-0" style="height: 100vh">
+
+    <h1 class="h3 mb-3">Tin nhắn</h1>
+
+    <div class="card">
+      <div class="row g-0">
+        <div class="col-12 col-lg-5 col-xl-3 border-right">
+
+          <div class="px-4 d-none d-md-block">
+            <div class="d-flex align-items-center">
+              <div class="flex-grow-1">
+                <input type="text" class="form-control my-3" placeholder="Tìm kiếm...">
+              </div>
+            </div>
+          </div>
+          <div class="list-computer">
+            <a href="#" class="list-group-item list-group-item-action border-0">
+              <div class="badge bg-success float-right">5</div>
+              <div class="d-flex align-items-start">
+                <img src="assets/img/user.png" class="rounded-circle mr-1"
+                     alt="Vanessa Tucker" width="40" height="40">
+                <div class="flex-grow-1 ml-3">
+                  Máy 1
+                  <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
+                </div>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action border-0">
+              <div class="badge bg-success float-right">2</div>
+              <div class="d-flex align-items-start">
+                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle mr-1"
+                     alt="William Harris" width="40" height="40">
+                <div class="flex-grow-1 ml-3">
+                  Máy 2
+                  <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
+                </div>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action border-0">
+              <div class="d-flex align-items-start">
+                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1"
+                     alt="Sharon Lessman" width="40" height="40">
+                <div class="flex-grow-1 ml-3">
+                  Máy 3
+                  <div class="small"><span class="fas fa-circle chat-online"></span> Online</div>
+                </div>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action border-0">
+              <div class="d-flex align-items-start">
+                <img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="rounded-circle mr-1"
+                     alt="Christina Mason" width="40" height="40">
+                <div class="flex-grow-1 ml-3">
+                  Máy 4
+                  <div class="small"><span class="fas fa-circle chat-offline"></span> Offline</div>
+                </div>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action border-0">
+              <div class="d-flex align-items-start">
+                <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle mr-1"
+                     alt="Fiona Green" width="40" height="40">
+                <div class="flex-grow-1 ml-3">
+                  Máy 5
+                  <div class="small"><span class="fas fa-circle chat-offline"></span> Offline</div>
+                </div>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action border-0">
+              <div class="d-flex align-items-start">
+                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle mr-1"
+                     alt="Doris Wilder" width="40" height="40">
+                <div class="flex-grow-1 ml-3">
+                  Máy 6
+                  <div class="small"><span class="fas fa-circle chat-offline"></span> Offline</div>
+                </div>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action border-0">
+              <div class="d-flex align-items-start">
+                <img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="rounded-circle mr-1"
+                     alt="Haley Kennedy" width="40" height="40">
+                <div class="flex-grow-1 ml-3">
+                  Máy 7
+                  <div class="small"><span class="fas fa-circle chat-offline"></span> Offline</div>
+                </div>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action border-0">
+              <div class="d-flex align-items-start">
+                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1"
+                     alt="Jennifer Chang" width="40" height="40">
+                <div class="flex-grow-1 ml-3">
+                  Máy 8
+                  <div class="small"><span class="fas fa-circle chat-offline"></span> Offline</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <hr class="d-block d-lg-none mt-1 mb-0">
+        </div>
+        <div class="col-12 col-lg-7 col-xl-9">
+          <div class="py-2 px-4 border-bottom d-none d-lg-block">
+            <div class="d-flex align-items-center py-1">
+              <div class="position-relative">
+                <img src="assets/img/user.png" class="rounded-circle mr-1"
+                     alt="Sharon Lessman" width="40" height="40">
+              </div>
+              <div class="flex-grow-1 pl-3">
+                <strong>{{roomName}}</strong>
+                <div class="text-muted small"><em>Đang hoạt động</em></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="position-relative">
+            <div class="chat-messages p-4" id="chatMessage" #chatMessage [scrollTop]="chatMessage.scrollHeight">
+              <div *ngFor="let c of chats">
+                <div class="chat-message-left pb-4" *ngIf="c.userName == roomName && c.date != yesterday && c.date != today"
+                     data-toggle="tooltip" data-placement="bottom" [title]="c.time|date:'short'">
+                  <div>
+                    <img src="assets/img/user.png" class="rounded-circle mr-1"
+                         alt="user" width="40" height="40">
+                  </div>
+                  <div class="message flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                    <div class="font-weight-bold mb-1">Máy 1</div>
+                    {{c.message}}
+                    <div class="text-muted small text-nowrap mt-2" data-toggle="tooltip" data-placement="right"
+                         [title]="c.time">{{c.time| date:'short'}}</div>
+                  </div>
+                </div>
+
+                <div class="chat-message-right mb-4" *ngIf="c.userName != roomName && c.date != yesterday && c.date != today"
+                     data-toggle="tooltip" data-placement="bottom" [title]="c.time|date:'short'">
+                  <div>
+                    <img src="assets/img/admin.png" class="rounded-circle mr-1"
+                         alt="Chris Wood" width="40" height="40">
+                  </div>
+                  <div class="message flex-shrink-1 rounded py-2 px-3 mr-3"
+                       style="background-color: rgba(41,177,219,0.68)">
+                    <div class="font-weight-bold mb-1">Bạn</div>
+                    {{c.message}}
+                    <div class="text-muted small text-nowrap mt-2">{{c.time | date:'short'}}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center" *ngIf="checkYesterday">Hôm qua,{{yesterday}}</div>
+              <div *ngFor="let c of chats">
+                <div class="chat-message-left pb-4" *ngIf="c.userName == roomName && c.date == yesterday"
+                     data-toggle="tooltip" data-placement="bottom" [title]="c.time|date:'short'">
+                  <div>
+                    <img src="assets/img/user.png" class="rounded-circle mr-1"
+                         alt="Sharon Lessman" width="40" height="40">
+                  </div>
+                  <div class="message flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                    <div class="font-weight-bold mb-1">Máy 1</div>
+                    {{c.message}}
+                    <div class="text-muted small text-nowrap mt-2" data-toggle="tooltip" data-placement="right"
+                         [title]="c.time">{{c.time| date:'shortTime'}}</div>
+                  </div>
+                </div>
+
+                <div class="chat-message-right mb-4" *ngIf="c.userName != roomName && c.date == yesterday"
+                     data-toggle="tooltip" data-placement="bottom" [title]="c.time|date:'short'">
+                  <div>
+                    <img src="assets/img/admin.png" class="rounded-circle mr-1"
+                         alt="Chris Wood" width="40" height="40">
+                  </div>
+                  <div class="message flex-shrink-1 rounded py-2 px-3 mr-3"
+                       style="background-color: rgba(41,177,219,0.68)">
+                    <div class="font-weight-bold mb-1">Bạn</div>
+                    {{c.message}}
+                    <div class="text-muted small text-nowrap mt-2">{{c.time | date:'shortTime'}}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center" *ngIf="checkToday">Hôm nay,{{today}}</div>
+              <div *ngFor="let c of chats">
+                <div class="chat-message-left pb-4" *ngIf="c.userName == roomName && c.date == today"
+                     data-toggle="tooltip" data-placement="bottom" [title]="c.time|date:'short'">
+                  <div>
+                    <img src="assets/img/user.png" class="rounded-circle mr-1"
+                         alt="Sharon Lessman" width="40" height="40">
+                  </div>
+                  <div class="message flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                    <div class="font-weight-bold mb-1">Máy 1</div>
+                    {{c.message}}
+                    <div class="text-muted small text-nowrap mt-2" data-toggle="tooltip" data-placement="right"
+                         [title]="c.time">{{c.time| date:'shortTime'}}</div>
+                  </div>
+                </div>
+
+                <div class="chat-message-right mb-4" *ngIf="c.userName != roomName && c.date == today"
+                     data-toggle="tooltip" data-placement="bottom" [title]="c.time|date:'short'">
+                  <div>
+                    <img src="assets/img/admin.png" class="rounded-circle mr-1"
+                         alt="Chris Wood" width="40" height="40">
+                  </div>
+                  <div class="message flex-shrink-1 rounded py-2 px-3 mr-3"
+                       style="background-color: rgba(41,177,219,0.68)">
+                    <div class="font-weight-bold mb-1">Bạn</div>
+                    {{c.message}}
+                    <div class="text-muted small text-nowrap mt-2">{{c.time | date:'shortTime'}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <emoji-mart class="emoji-mart pop-up-emoji" set="facebook" *ngIf="showEmojiPicker"
+                      (emojiSelect)="addEmoji($event)" title="Pick your emoji…"
+          ></emoji-mart>
+          <div class="flex-grow-0 py-3 px-4 border-top">
+            <form class="input-group" [formGroup]="chatForm" (ngSubmit)="onsubmit()">
+              <a class="icon-emoji" (click) ="toggleEmojiPicker()"><fa-icon [icon]="faSmileBean"></fa-icon></a>
+              <input style="height: 45px; box-shadow: none !important; " formControlName="message" type="text" class="form-control" placeholder="Nhập tin nhắn của bạn..."
+                     (change)="changeMess($event)" (blur)="onBlur()" (focus)="onFocus()"
+                     name="message" [(ngModel)]="message">
+              <button type="submit" class="btn btn-primary">Gửi</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+

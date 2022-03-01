@@ -1,0 +1,60 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col"></div>
+
+    <div class="col">
+      <div class="dropdown">
+        <select class="btn dropdown-toggle option" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false" (change)="searchOption()"
+                [(ngModel)]="keyOption">
+          <option selected value="">All Game</option>
+          <option *ngFor="let category1 of category" [value]="category1">{{category1}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-4 d-flex justify-content-center">
+        <input class="form-control me-2 search" type="search" [(ngModel)]="searchName" (ngModelChange)="search()" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </div>
+    <div class="col"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mt-5" *ngFor="let game1 of game">
+      <div class="card content">
+        <a href="">
+          <img style="width: 100%; max-height: 180px" class="content-image" src="{{game1.gameImage}}"/>
+        </a>
+        <div class="content-details fadeIn-bottom">
+          <button class="btn btn-danger play">Chơi Ngay</button>
+        </div>
+        <div class="card-body content">
+          <h4>{{game1.gameName}}</h4>
+          <p>Game Type: {{game1.gameCategory}}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<nav aria-label="Page navigation example" class="mt-5">
+  <ul class="pagination justify-content-center">
+    <li class="page-item bg-secondary">
+      <a class="page-link" *ngIf="(pageNow-1)>0" (click)="getPage((pageNow-2))">Previous</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" *ngIf="(pageNow-1)>0" (click)="getPage((pageNow-2))" >{{pageNow-1}}</a>
+    </li>
+    <li class="page-item active">
+      <a class="page-link" (click)="getPage((pageNow-1))">{{pageNow}}</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" *ngIf="(pageNow+1)<=totalPage" (click)="getPage((pageNow))">{{pageNow+1}}</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" *ngIf="(pageNow+1)<=totalPage" (click)="getPage((pageNow))">Next</a>
+    </li>
+  </ul>
+</nav>

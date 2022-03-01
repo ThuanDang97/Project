@@ -1,0 +1,78 @@
+
+<section class="ftco-section img js-fullheight"
+         style="background-image: url(../../../../assets/sercurity/images/bg_gaming.jpg);height: 750px">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center mb-5">
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4">
+        <div class="login-wrap p-0">
+          <h3 class="mb-4 text-center">Chưa có tài khoản? Đăng kí ngay</h3>
+          <form action="#" class="signin-form" [formGroup]="loginForm" (ngSubmit)="signIn()" novalidate>
+            <div class="form-group">
+              <input type="text" class="form-control"
+                     style="background: linear-gradient( 120deg , #3299cc, #621818);"
+                     placeholder="Tài khoản"
+                     formControlName="username" maxlength="15">
+            </div>
+            <div *ngIf="getUserName?.invalid && (getUserName?.dirty|| getUserName?.touched)">
+              <div class="alert alert-danger"
+                   [hidden]="!getUserName?.errors?.minlength" style="border-radius: 1.25rem;">Tài khoản tối thiếu 4 kí tự.
+              </div>
+              <div class="alert alert-danger"
+                   [hidden]="!getUserName?.errors?.required" style="border-radius: 1.25rem;">Tài khoản không được trống.
+              </div>
+            </div>
+            <div class="form-group">
+              <input id="password-field" type="password"
+                     style="background: linear-gradient(120deg, #3299cc, #621818);"
+                     class="form-control" placeholder="Mật khẩu" formControlName="password"  maxlength="15">
+              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+            </div>
+
+            <div *ngIf="getPassword?.invalid && (getPassword?.dirty|| getPassword?.touched)">
+              <div class="alert alert-danger"
+                   [hidden]="!getPassword?.errors?.minlength" style="border-radius: 1.25rem;">Mật khẩu tối thiểu 8 kí tự.
+              </div>
+              <div class="alert alert-danger"
+                   [hidden]="!getPassword?.errors?.pattern" style="border-radius: 1.25rem;">Mật khẩu phải vừa chứa số và chữ.
+              </div>
+              <div class="alert alert-danger"
+                   [hidden]="!getPassword?.errors?.required" style="border-radius: 1.25rem;">Mật khẩu không được trống.
+              </div>
+
+            </div>
+
+            <div class="form-group">
+              <button style=" opacity: 0.9;background: #262222;" type="submit"
+                      class="form-control btn submit px-3" [disabled]="loginForm.invalid">Đăng nhập
+              </button>
+            </div>
+            <div class="form-group">
+              <button style="opacity: 0.9;" class="form-control btn btn-primary submit px-3">
+                Đăng kí
+                <a href="sidebar-05/index.html">
+                </a></button>
+            </div>
+            <div class="form-group d-md-flex">
+              <div class="w-50">
+                <label class="checkbox-wrap checkbox-primary">Ghi nhớ đăng nhập
+                  <input type="checkbox" checked>
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="w-50 text-md-right">
+                <a href="#" style="color: #fff">Quên mật khẩu</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+

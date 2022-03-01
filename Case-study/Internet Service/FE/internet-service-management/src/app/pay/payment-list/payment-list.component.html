@@ -1,0 +1,72 @@
+<div class="container-fluid mt-5">
+    <h1>Thanh toán</h1>
+    <div class="m-3 d-flex justify-content-end">
+        <div>
+            <input type="text" class="form-control" [(ngModel)]="searchName" placeholder="Tìm kiếm">
+        </div>
+        <button class=" ml-2 btn btn-success rounded-circle" (click)="search();"><i
+                class="fas fa-search-plus"></i></button>
+    </div>
+    <table class="table table-bordered table-striped table-hover table-reponsive">
+        <thead style="background-color: #96ee4d">
+            <tr>
+                <th scope="col" class="align-middle text-center">Mã số máy</th>
+                <th scope="col" class="align-middle text-center">Tên khách hàng</th>
+                <th scope="col" class="align-middle text-center">Email</th>
+                <th scope="col" class="align-middle text-center">Thời gian bắt đầu</th>
+                <th scope="col" class="align-middle text-center">Thời gian kết thúc</th>
+                <th scope="col" class="align-middle text-center">Thời gian <br> sử dụng <br>(giờ)</th>
+                <th scope="col" class="align-middle text-center">Thông tin dịch vụ</th>
+                <th scope="col" class="align-middle text-center">Tổng thanh toán <br> (VNĐ)</th>
+                <th scope="col" class="align-middle text-center">Trạng thái</th>
+                <th scope="col" class="align-middle text-center">Thanh toán</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let payment of payments">
+                <th class="text-left align-middle">{{payment.order.computer.computerId}}</th>
+                <td class="text-left align-middle">{{payment.order.customer.fullName}}</td>
+                <td class="text-left align-middle">{{payment.order.customer.email}}</td>
+                <td class="align-middle text-center">{{payment.order.startTime | date :'short'}}</td>
+                <td class="align-middle text-center">{{payment.order.endTime | date :'short'}}</td>
+                <td class="text-right align-middle">{{payment.order.usageTime}}</td>
+                <td class="align-middle text-center">
+                    <button class="btn btn-info" mat-raised-button (click)="openDialogDetail(payment.id)">Chi
+                        tiết</button>
+                </td>
+                <td class="text-right align-middle">{{payment.totalPayment | currency:'VND':true}}</td>
+                <td class="align-middle text-left">{{payment.status ? 'Đã thanh toán' : 'Chưa thanh toán'}}</td>
+                <td class="align-middle text-center">
+                    <button [disabled]="payment.status" class="btn btn-warning text-white" mat-raised-button
+                        (click)="openDialogPayment(payment.id)">Thanh
+                        toán</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!--- Phân Trang--->
+    <nav aria-label="..." class="d-flex justify-content-end mt-3 mr-5">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" (click)="getPage(0)">Đầu</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" tabindex="-1" *ngIf="(indexPagination-1)>0"
+                    (click)="getPage((indexPagination-2))">Trước</a>
+            </li>
+            <li class="page-item"><a class="page-link" *ngIf="(indexPagination-1)>0"
+                    (click)="getPage((indexPagination-2))">{{indexPagination - 1}}</a></li>
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" (click)="getPage((indexPagination-1))">{{indexPagination}}</a>
+            </li>
+            <li class="page-item"><a class="page-link" *ngIf="(indexPagination +1)<= totalPagination"
+                    (click)="getPage((indexPagination))">{{indexPagination + 1}}</a></li>
+            <li class="page-item">
+                <a class="page-link" *ngIf="(indexPagination +1)<= totalPagination"
+                    (click)="getPage((indexPagination))">Sau</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" (click)="getPage((totalPagination-1))">Cuối</a>
+            </li>
+        </ul>
+    </nav>

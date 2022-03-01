@@ -1,0 +1,241 @@
+.wrap-pop-up {
+  position: absolute;
+  bottom: 0;
+  right: 5%;
+  max-width: 350px;
+  border-radius: 5rem 5rem 0 0;
+  padding: -10% 10% -10% 10%;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 50%;
+}
+
+.msg-header {
+  border: 0;
+  width: 350px;
+  height: 10%;
+  border-bottom: none;
+  display: inline-block;
+  border-radius: 2.5rem 2.5rem 0 0;
+}
+
+.msg-header-img {
+  border-radius: 50%;
+  width: 40px;
+  margin-left: 5%;
+  margin-top: 12px;
+  float: left;
+}
+
+.active-user {
+  width: 120px;
+  float: left;
+  margin-top: 18px;
+}
+
+.active-user h4 {
+  font-size: 25px;
+  margin-left: 10px;
+  color: black;
+}
+
+.active-user h6 {
+  font-size: 15px;
+  margin-top: 8px;
+  margin-left: 10px;
+  line-height: 2px;
+  color: black;
+}
+
+.chat-page {
+  margin: 5% 5%;
+  height: 300px;
+  width: 350px;
+  max-height: 290px;
+  overflow-y: scroll;
+}
+
+.msg-inbox {
+  border: 0;
+  overflow: hidden;
+  padding-bottom: 30px;
+}
+
+.chats {
+  padding: 30px 15px 0 25px;
+}
+
+.msg-page {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.received-chats {
+  margin-bottom: 3%;
+}
+
+.received-chats-img {
+  width: 15px;
+  float: left;
+}
+
+.received-msg {
+  display: inline-block;
+  padding: 0;
+  vertical-align: top;
+  width: 80%;
+}
+
+.received-msg-inbox {
+  padding: 0;
+  flex-direction: row-reverse;
+}
+
+.received-msg-inbox p {
+  background: #E4E9F7 none repeat scroll 0 0;
+  border-radius: 10px;
+  color: black;
+  font-size: 15px;
+  margin: 0;
+  padding: 5px 10px 5px 12px;
+  max-width: 70%;
+  height: auto;
+  float: left;
+  word-wrap: break-word;
+}
+
+.received-time {
+  position: relative;
+  float: left;
+  color: white;
+  display: block;
+  font-size: 12px;
+  margin: 8px 0 0;
+}
+
+.time {
+  position: relative;
+  float: right;
+  color: white;
+  display: block;
+  font-size: 12px;
+  margin: 8px 0 0;
+}
+
+.outgoing-chats {
+  margin-bottom: 3%;
+  padding-right: 1%;
+  flex-direction: row-reverse;
+}
+
+.outgoing-chats-msg p {
+  background: #7794e7 none repeat scroll 0 0;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  margin: 0;
+  padding: 5px 5px 5px 12px;
+  max-width: 70%;
+  height: auto;
+  float: right;
+  word-wrap: break-word;
+}
+
+
+.outgoing-chats-msg {
+  padding: 0;
+  float: left;
+  width: 100%;
+}
+
+.outgoing-chats-img {
+  width: 15px;
+  float: right;
+}
+
+.input-msg input {
+  border-radius: 2.5rem;
+  box-shadow: none !important;
+}
+
+.icon-send fa-icon {
+  font-size: 25px;
+  color: dodgerblue;
+}
+
+.icon-send {
+  box-shadow: none !important;
+}
+
+.list-computer {
+  background: #1d1b31;
+  padding: 0 0 50px 0;
+  height: 571px;
+}
+
+.list-computer a {
+  margin: 0;
+}
+
+.list-computer h1 {
+  font-size: 25px;
+}
+
+.header-list {
+  color: #E4E9F7;
+  margin: 5px 0 10px 0;
+}
+
+
+.item-pc-img {
+  border-radius: 50%;
+  width: 40px;
+  margin-left: 5%;
+  margin-top: 12px;
+  float: left;
+}
+
+.item-pc-name {
+  width: 100px;
+  float: left;
+  margin-top: 20px;
+}
+
+.item-pc-name h4 {
+  font-size: 20px;
+  margin-left: 10px;
+  color: white;
+}
+
+.icon-pop-up {
+  position: absolute;
+  bottom: 1%;
+  right: 1%;
+}
+
+.icon-pop-up fa-icon {
+  position: sticky;
+  font-size: 250%;
+  color: #3299cc;
+}
+
+.icon-emoji {
+  position: absolute;
+  z-index: 5;
+  right: 84%;
+  bottom: 30%;
+}
+
+.icon-emoji fa-icon {
+  font-size: 200%;
+  color: #3299cc;
+}
+
+.pop-up-emoji {
+  position: absolute;
+  z-index: 50;
+  top: -15%;
+  right: 70%
+}

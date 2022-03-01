@@ -1,0 +1,163 @@
+
+<button type="button" class="btn btn-success d-table my-5 mx-auto" data-bs-toggle="modal" data-bs-target="#ModalForm">
+  Tạo Mới Máy Tính
+</button>
+
+<!-- Modal Form -->
+<div class="modal fade" id="ModalForm" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Login Form -->
+      <form [formGroup]="createForm" (ngSubmit)="createComputer()" novalidate>
+        <div class="modal-header">
+          <h5 class="modal-title">Tạo Mới Máy Tính</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label>Mã Máy Tính<span class="text-danger">*</span></label>
+            <input type="text" class="form-control mt-1" formControlName="computerId"
+                   placeholder="Nhập mã máy tính CP-XXXX">
+          </div>
+          <div class="mb-3">
+            <div *ngIf="getID()?.invalid && (getID()?.dirty|| getID()?.touched)">
+              <div class="text-danger mt-1" style="width: 400px; margin-left: 2%"
+                   [hidden]="!getID()?.errors?.pattern">
+                Mã máy tính theo định dạng CP-XXXX với X từ 0-9
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label>Trạng Thái<span class="text-danger">*</span></label>
+            <label>
+              <select class="form-control mt-1" formControlName="status" style="width: 465px">
+                <option value="" selected>Chọn Trạng Thái...</option>
+                <ng-container *ngFor="let status of listStatus ">
+                  <option [ngValue]="status">{{status.statusName}}</option>
+                </ng-container>
+              </select>
+            </label>
+          </div>
+          <div class="mb-3">
+            <div *ngIf="getStatus()?.invalid && (getStatus()?.dirty|| getStatus()?.touched)">
+              <div class="text-danger mt-1" style="width: 400px; margin-left: 2%"
+                   [hidden]="!getStatus()?.errors?.required">
+                Vui lòng chọn lại trạng thái
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label>Vị Trí<span class="text-danger">*</span></label>
+            <input type="text" class="form-control mt-1" formControlName="computerLocation"
+                   placeholder="Nhập vị trí AXXXX">
+          </div>
+          <div class="mb-3">
+            <div
+              *ngIf="getComputerLocation()?.invalid && (getComputerLocation()?.dirty|| getComputerLocation()?.touched)">
+              <div class="text-danger mt-1" style="width: 400px; margin-left: 2%"
+                   [hidden]="!getComputerLocation()?.errors?.pattern">
+                Nhập vào vị trí AXXX, BXXX, CXXX, DXXX Với X là 0-9
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label>IP Local<span class="text-danger">*</span></label>
+            <input type="text" class="form-control mt-1" formControlName="computerIpLocal"
+                   placeholder="Nhập IP Local">
+          </div>
+          <div class="mb-3">
+            <div
+              *ngIf="getComputerIpLocal()?.invalid && (getComputerIpLocal()?.dirty|| getComputerIpLocal()?.touched)">
+              <div class="text-danger mt-1" style="width: 400px; margin-left: 2%"
+                   [hidden]="!getComputerIpLocal()?.errors?.required">
+                Vui lòng nhập IP Local
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label>Ngày Bắt Đầu<span class="text-danger">*</span></label>
+            <input type="date" class="form-control mt-1" formControlName="computerStartUsedDate">
+          </div>
+          <div class="mb-3">
+            <div
+              *ngIf="getComputerStartUsedDate()?.invalid && (getComputerStartUsedDate()?.dirty|| getComputerStartUsedDate()?.touched)">
+              <div class="text-danger mt-1" style="width: 400px; margin-left: 2%"
+                   [hidden]="!getComputerStartUsedDate()?.errors?.required">
+                Ngày sử dụng phải <= ngày hiện tại
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label>Cấu Hình<span class="text-danger">*</span></label>
+            <input type="text" class="form-control mt-1" formControlName="computerConfiguration"
+                   placeholder="Nhập cấu hình máy">
+          </div>
+          <div class="mb-3">
+            <div *ngIf="getComputerConfiguration()?.invalid && (getComputerConfiguration()?.dirty||
+              getComputerConfiguration()?.touched)">
+              <div class="text-danger mt-1" style="width: 400px; margin-left: 2%"
+                   [hidden]="!getComputerConfiguration()?.errors?.required">
+                Cấu hình máy trống
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label>Loại Máy<span class="text-danger">*</span></label>
+            <label>
+              <select class="form-control mt-1" formControlName="type" style="width: 465px">
+                <option value="" selected>Chọn Loại Máy...</option>
+                <ng-container *ngFor="let type of listType">
+                  <option [ngValue]="type">{{type.typeName}}</option>
+                </ng-container>
+              </select>
+            </label>
+          </div>
+          <div class="mb-3">
+            <div *ngIf="getType()?.invalid && (getType()?.dirty|| getType()?.touched)">
+              <div class="text-danger mt-1" style="width: 400px; margin-left: 2%"
+                   [hidden]="!getType()?.errors?.required">
+                Loại phải bao gồm 1, 2, 3
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label>Hãng Sản Xuất<span class="text-danger">*</span></label>
+            <label>
+              <select class="form-control mt-1" formControlName="manufacturer" style="width: 465px">
+                <option value="" selected>Chọn Hãng Sản Xuất...</option>
+                <ng-container *ngFor="let manufacturer of listManufacturer">
+                  <option [ngValue]="manufacturer">{{manufacturer.manufacturerName}}</option>
+                </ng-container>
+              </select>
+            </label>
+          </div>
+          <div class="mb-3">
+            <div *ngIf="getManufacturer()?.invalid && (getManufacturer()?.dirty|| getManufacturer()?.touched)">
+              <div class="text-danger mt-2" style="width: 200px; margin-left: 36%"
+                   [hidden]="!getManufacturer()?.errors?.required">
+                Hãng sản xuất bao gồm Dell, Asus...
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label>Thời Gian bảo Hành<span class="text-danger">*</span></label>
+            <input type="text" class="form-control mt-1" formControlName="computerWarrantyPeriod"
+                   placeholder="Nhập thời gian bảo hành máy">
+          </div>
+          <div class="mb-3">
+            <div
+              *ngIf="getComputerWarrantyPeriod()?.invalid && (getComputerWarrantyPeriod()?.dirty|| getComputerWarrantyPeriod()?.touched)">
+              <div class="text-danger mt-2" style="width: 200px; margin-left: 36%"
+                   [hidden]="!getComputerWarrantyPeriod()?.errors?.required">
+                Thời gian bảo hành trống
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer pt-4">
+          <button type="submit" class="btn btn-success mx-auto w-100">Tạo Mới</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,224 @@
+<div
+  style="background-size: cover;background-repeat: no-repeat;height: 100%;">
+  <div class="container py-5" style="border-radius: 10px;">
+    <div style="padding: 15px 10%; background: rgb(255, 255, 255);">
+      <h2 class="alert" role="alert" style="text-align: center;background-color: #00BFFF; font-family: Roboto">Chỉnh sửa nhân viên</h2>
+      <hr>
+      <form [formGroup]="employeeEditForm" (ngSubmit)="editEmployee()" novalidate>
+        <div class="row mt-3">
+          <div class="col-6">
+            <label for="id" class="fontFamily">Mã nhân viên</label>
+            <span style="color: red">(*)</span>
+            <input readonly="readonly" type="text" class="form-control" id="id" formControlName="employeeId" placeholder="Mã nhân viên">
+          </div>
+          <div class="col-6">
+            <label for="name" class="fontFamily">Họ tên</label>
+            <span style="color: red">(*)</span>
+            <input type="text" class="form-control" id="name" formControlName="fullName" placeholder="Vui lòng nhập họ tên">
+            <div class="fontError mt-1 text-danger"
+                 *ngIf="employeeEditForm.controls.fullName.hasError('required') &&
+                 employeeEditForm.controls.fullName.touched">Vui lòng nhập tên đầy đủ.
+            </div>
+            <div class="fontError mt-1 text-danger"
+                 *ngIf="employeeEditForm.controls.fullName.hasError('pattern') &&
+                 employeeEditForm.controls.fullName.touched">Không được nhập các kí tự đặc biệt.
+            </div>
+            <div class="fontError mt-1 text-danger"
+                 *ngIf="employeeEditForm.controls.fullName.hasError('minlength') &&
+                 employeeEditForm.controls.fullName.touched">Tên có kích thước bé hơn 5.
+            </div>
+            <div class="fontError mt-1 text-danger"
+                 *ngIf="employeeEditForm.controls.fullName.hasError('maxlength') &&
+                 employeeEditForm.controls.fullName.touched">Tên có kích thước lớn nhất 20.
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-6">
+            <label for="position" class="fontFamily">Vị trí</label>
+            <span style="color: red">(*)</span>
+            <select class="form-control" style="font-size: 18px" id="position" formControlName="position" [compareWith]="compareP">
+              <option selected value="">Chọn vị trí</option>
+<!--              <option *ngFor="let p of positionList" [Value]="p.positionId">{{p.positionName}}</option>-->
+            </select>
+            <div class="fontError mt-1 text-danger"
+                 *ngIf="employeeEditForm.controls.position.hasError('required') &&
+                 employeeEditForm.controls.position.touched">Vui lòng chọn vị trí.
+            </div>
+          </div>
+
+          <div class="col-6">
+            <label for="dateOfBirth" class="fontFamily">Ngày sinh</label>
+            <span style="color: red">(*)</span>
+            <input type="date" class="form-control" id="dateOfBirth" formControlName="dateOfBirth"
+                   (click)="resetMsgDateOfBirth()">
+            <span class="fontError mt-1 text-danger"
+                  *ngIf="employeeEditForm.controls.dateOfBirth.hasError('required') &&
+                 employeeEditForm.controls.dateOfBirth.touched">Vui lòng chọn ngày sinh.</span>
+            <span class="fontError mt-1 text-danger"
+                  *ngIf="employeeEditForm.controls.dateOfBirth.hasError('invalidAge') &&
+                 employeeEditForm.controls.dateOfBirth.touched">Tuổi phải lớn hơn 18.</span>
+            <span class="fontError mt-1 text-danger"
+                  *ngIf="employeeEditForm.controls.dateOfBirth.hasError('invalidDateOfBirth') &&
+                 employeeEditForm.controls.dateOfBirth.touched">Ngày sinh không hợp lệ, xin hãy chọn lại.</span>
+            <span class="fontError">{{msgDateOfBirth}}</span>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-6">
+            <label for="phone" class="fontFamily">Số điện thoại</label>
+            <span style="color: red">(*)</span>
+            <input type="text" class="form-control" id="phone" formControlName="phone" placeholder="Số điện thoại không được để trống ">
+            <div class="fontError mt-1 text-danger"
+                 *ngIf="employeeEditForm.controls.phone.hasError('required') &&
+                 employeeEditForm.controls.phone.touched">Vui lòng nhập số điện thoại.
+            </div>
+            <div class="fontError mt-1 text-danger"
+                 *ngIf="employeeEditForm.controls.phone.hasError('pattern') &&
+                 employeeEditForm.controls.phone.touched">Số điện thoại định dạng 090XXXXXXXXX, X từ 0-9.
+              digit.
+            </div>
+          </div>
+          <div class="col-6">
+            <label for="startWorkDate" class="fontFamily">Ngày bắt đầu làm việc</label>
+            <span style="color: red">(*)</span>
+            <input type="date" class="form-control" id="startWorkDate" formControlName="startWorkDate"
+                   (click)="resetMsgStartWorkDate()">
+            <span class="fontError mt-1 text-danger"
+                  *ngIf="employeeEditForm.controls.startWorkDate.hasError('required') &&
+                 employeeEditForm.controls.startWorkDate.touched">Vui lòng chọn ngày làm việc. </span>
+            <span class="fontError mt-1 text-danger"
+                  *ngIf="employeeEditForm.controls.startWorkDate.hasError('inValidDate') &&
+                 employeeEditForm.controls.startWorkDate.touched">Ngày làm việc không nhỏ hơn ngày hiện tại.</span>
+            <span class="fontError">{{msgStartWorkDate}}</span>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-6">
+            <label for="email" class="fontFamily">Email</label>
+            <span style="color: red">(*)</span>
+            <input type="text" class="form-control" id="email" formControlName="email" placeholder="Email"
+                   (click)="resetMsgEmail()">
+            <div class="fontError mt-1 text-danger"
+                 *ngIf="employeeEditForm.controls.email.hasError('required') &&
+                 employeeEditForm.controls.email.touched">Vui lòng nhập email.
+            </div>
+            <div class="fontError mt-1 text-danger"
+                 *ngIf="employeeEditForm.controls.email.hasError('email') &&
+                 employeeEditForm.controls.email.touched">Email đúng định dạng abc@abc.
+            </div>
+            <div class="fontError mt-1 text-danger"
+                 *ngIf="employeeEditForm.controls.email.hasError('maxlength') &&
+                 employeeEditForm.controls.email.touched">Email kích thước không quá 20.
+            </div>
+            <div class="fontError">{{msgEmail}}</div>
+          </div>
+          <div class="col-6">
+            <label for="level" class="fontFamily">Cấp bậc</label>
+            <span style="color: red">(*)</span>
+            <input type="number" class="form-control" id="level" formControlName="level" placeholder="Vui lòng nhập cấp bậc">
+            <div class="fontError mt-1 text-danger"
+                 *ngIf="employeeEditForm.controls.level.hasError('invalidLevel') &&
+                 employeeEditForm.controls.level.touched">Cấp bậc phải lớn hơn 0 và < 50
+            </div>
+          </div>
+        </div>
+        <div formGroupName="address">
+          <div class="mt-3">
+            <label class="fontFamily">Địa chỉ</label>
+            <span style="color: red">(*)</span>
+            <div class="row">
+              <div class="col-4">
+                <select class="form-control" formControlName="province" id="province" #province (change)="getAllDistrict(province.value)">
+                  <option selected value=" ">Thành Phố/Tỉnh</option>
+                  <option *ngFor="let p of provinces" [value]="p.province_name+'&'+p.province_id" >{{p.province_name}}</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <select class="form-control" formControlName="district" id="district" #district (change)="getAllWard(district.value)">
+                  <option selected value=" ">Quận/Huyện</option>
+                  <option *ngFor="let d of districts" [value]="d.district_name+'&'+d.district_id" >{{d.district_name}}</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <select class="form-control" formControlName="ward" id="ward">
+                  <option selected value=" ">Phường/Xã</option>
+                  <option *ngFor="let w of wards" [value]="w.ward_name + '&' + w.ward_id">{{w.ward_name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div>
+          <div class="row mt-3">
+            <div class="col-6">
+              <label for="password" class="fontFamily">Mật khẩu mới</label>
+              <span style="color: red">(*)</span>
+              <input type="password" class="form-control" id="password"
+                     formControlName="password"
+                     placeholder="Mật khẩu mới không được để trống">
+              <div class="fontError mt-1 text-danger"
+                   *ngIf="employeeEditForm.controls.password.hasError('required') &&
+                 employeeEditForm.controls.password.touched">Vui lòng nhập mật khẩu.
+              </div>
+              <div class="fontError mt-1 text-danger"
+                   *ngIf="employeeEditForm.controls.password.hasError('pattern') &&
+                   employeeEditForm.controls.password.touched">Vui lòng nhập ký tự tối thiểu 6, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt.
+              </div>
+              <div class="fontError">{{msgPassword}}</div>
+            </div>
+            <div class="col-6">
+              <label for="confirmPassword" class="fontFamily">Nhập lại mật khẩu</label>
+              <span style="color: red">(*)</span>
+              <input type="password" class="form-control" id="confirmPassword"
+                     formControlName="confirmPassword" placeholder="Vui lòng nhập lại mật khẩu">
+              <div class="fontError text-danger" *ngIf="employeeEditForm.errors?.invalidPassword">Mật khẩu mới không khớp với mật khẩu xác nhận.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-6">
+            <label for="yearOfExp" class="fontFamily">Kinh nghiệm làm việc</label>
+            <span style="color: red">(*)</span>
+            <input type="number" class="form-control" id="yearOfExp" formControlName="yearOfExp"
+                   placeholder="Kinh nghiệm làm việc không được để trống">
+            <div class="fontError mt-1 text-danger"
+                 *ngIf="employeeEditForm.controls.yearOfExp.hasError('required') &&
+                 employeeEditForm.controls.yearOfExp.touched">Vui lòng nhập năm kinh nghiệm> = 0 và <50.
+            </div>
+            <div class="fontError mt-1 text-danger"
+                 *ngIf="employeeEditForm.controls.yearOfExp.hasError('invalidYearOfExp') &&
+                 employeeEditForm.controls.yearOfExp.touched">Vui lòng nhập năm kinh nghiệm> = 0 và <50.
+            </div>
+            <div class="mt-3">
+              <label class="fontFamily">Ảnh</label>
+              <div class="form-group">
+                <label>
+                  <input type="file" class="text-nowrap text-truncate" (change)="selectFile($event)"/>
+                </label>
+                <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+                  Chỉnh ảnh
+                </button>
+              </div>
+            </div>
+            <div class="text-center">
+              <button  type="submit" class="btn btn-primary fontButton" [disabled]="employeeEditForm.invalid">Chỉnh sửa </button>
+            </div>
+          </div>
+          <div class="col-3">
+            <img [src]="avtUrl" style="width: 100%">
+          </div>
+        </div>
+        <hr>
+      </form>
+    </div>
+  </div>
+</div>
+
+

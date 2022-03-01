@@ -1,0 +1,86 @@
+<nav class="navbar navbar-light bg-secondary">
+  <a class="navbar-brand h3 m-0" href="#">Trang chủ</a>
+</nav>
+<div class="container-fluid">
+  <p class="h1 text-center mt-3 mb-5">Trang thống kê</p>
+  <div class="row">
+    <div class="col-xl-4 col-lg-4">
+      <div class="row mb-4">
+        <div class="col-xl-4  d-flex align-items-center">
+          <label for="startDate">Ngày bắt đầu</label>
+        </div>
+        <div class="col">
+          <input type="date" id="startDate" name="startDate" class="form-control" min="1997-01-01" max="2030-12-31"
+                 [value]="startTime" (change)="setStartTime($any($event).target.value)"
+                 [ngClass]="statusErrorStart ? 'is-invalid' : ''">
+          <div class="invalid-feedback" >{{messageErrorStart}}</div>
+        </div>
+      </div>
+      <div class="row mb-4" [ngClass]="mode=='account' ? 'd-none' : 'd-flex'">
+        <div class="col-xl-4  d-flex align-items-center">
+          <label for="endDate">Ngày kết thúc</label>
+        </div>
+        <div class="col">
+          <input type="date" id="endDate" min="1997-01-01" max="2030-12-31" name="endDate" class="form-control"
+                 [value]="endTime"
+                 (change)="setEndTime($any($event).target.value)" [ngClass]="statusErrorEnd ? 'is-invalid' : ''">
+          <div class="invalid-feedback" id="feedbackEndDate">{{messageErrorEnd}}</div>
+        </div>
+      </div>
+      <div class="row mb-4" [ngClass]="mode=='account' ? 'd-flex' : 'd-none'" id="timeDiv">
+        <div class="col-xl-4 d-flex align-items-center">
+          <label for="timeSelect">Thời gian</label>
+        </div>
+        <div class="col">
+          <select name="" id="timeSelect" class="form-control" [value]="time" (change)="setTime($any($event).target.value)">
+            <option value="1week">1 Tuần</option>
+            <option value="2week">2 Tuần</option>
+            <option value="1month">1 Tháng</option>
+            <option value="1quarter">1 Quý</option>
+            <option value="2quarter">2 Quý</option>
+            <option value="1year">1 Năm</option>
+          </select>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-xl-4  d-flex align-items-center">
+          <label for="modeStatistical" class="m-0">Thống kê theo</label>
+        </div>
+        <div class="col">
+          <select name="" id="modeStatistical" class="form-control" [value]="mode"
+                  (change)="changeMode($any($event).target.value)">
+            <option value="computer">Máy tính</option>
+            <option value="month">Tháng</option>
+            <option value="account">Tài khoản</option>
+          </select>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center mt-5">
+        <button class="btn btn-primary" id="confirm" (click)="onSubmit()">OK</button>
+      </div>
+    </div>
+    <div class="col-xl-8 col-lg-8 border-left border-bottom" >
+      <div class="">
+        <p class="text-secondary font-weight-bold" id="statisticalX">{{labelY}}</p>
+        <div class="pr-4">
+
+          <canvas baseChart
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [plugins]="barChartPlugins"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType"
+                  *ngIf="isData">
+          </canvas>
+          <div class="d-flex align-items-center justify-content-center" style="height: 400px" *ngIf="!isData">
+            <p class="display-3 text-center">Không có dữ liệu</p>
+          </div>
+        </div>
+
+        <p class="text-secondary text-right font-weight-bold" id="statisticalY">{{labelX}}</p>
+      </div>
+      <!-- <div id="chart_div" style="width: 800px;"></div> -->
+    </div>
+  </div>
+</div>

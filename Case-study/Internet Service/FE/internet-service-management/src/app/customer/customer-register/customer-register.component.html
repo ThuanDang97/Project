@@ -1,0 +1,367 @@
+<div class="modal fade text-white" id="modalRegister" tabindex="-1" aria-labelledby="exampleModalLabel"
+     data-target="#staticBackdrop"
+     style="border-radius: 2.5rem; border: 0">
+  <div class="modal-dialog modal-lg text-white" style="border-radius: 2.5rem">
+    <div class="modal-content" style="border-radius: 2.5rem">
+      <div class="img container mr-3 container-fluid"
+           style="border-radius: 2.5rem;background-color: #1d1b31 ;opacity: 0.8">
+        <h1 class="text-center mt-3">Đăng ký tài khoản</h1>
+        <p class="mt-3 text-center">Bạn đã có tài khoản? <a href="">Đăng nhập</a></p>
+        <form class="row g-3 mt-4" style="margin-left: 5%" [formGroup]="registerForm" (change)="checkDisable()" (submit)="onSubmit()"
+              novalidate>
+          <div class="mb-3 row input-group">
+            <div class="col-lg-6 col-sm-6 col-xl-6">
+              <div class="row col-lg-12 col-xl-12 col-sm-12">
+                <label for="inputName" class="col-sm-5 col-lg-5 col-xl-5 col-form-label required">Họ và
+                  tên</label>
+                <div class="col-sm-7 p-0 col-lg-7 col-xl-7">
+                  <input formControlName="fullName" type="text" class="form-control" style="width: 100%;"
+                         id="inputName"
+                         placeholder="VD. Nguyen Van A">
+                </div>
+              </div>
+              <div class="row col-lg-12 col-xl-12 col-sm-12"
+                   *ngIf="registerForm.controls.fullName.invalid && (registerForm.controls.fullName.dirty || registerForm.controls.fullName.touched)">
+                <div class="col-lg-5 col-xl-5 col-sm-5"></div>
+                <label class="col-sm-7 col-xl-7 col-sm-7" for="inputName" style="color: #f32020;"
+                       *ngIf="registerForm.controls.fullName.errors?.required">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  Vui lòng nhập họ và tên.
+                </label>
+                <label class="col-sm-7 col-xl-7 col-sm-7" for="inputName" style="color: #f32020;"
+                       *ngIf="registerForm.controls.fullName.errors?.pattern">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  Họ và tên không được chứa ký tự đặc biệt và số.
+                </label>
+              </div>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-xl-6 p-0">
+              <div class="row col-lg-12 col-xl-12 col-sm-12">
+                <label for="inputDateOfBirth"
+                       class="col-sm-4 col-lg-4 col-xl-4 col-form-label required">Ngày sinh</label>
+                <div class="col-sm-7 p-0 col-xl-7 col-sm-7">
+                  <input formControlName="dateOfBirth" type="date" class="form-control" width="100%"
+                         id="inputDateOfBirth">
+                </div>
+              </div>
+              <div class="row col-lg-12 col-xl-12 col-sm-12"
+                   *ngIf="registerForm.controls.dateOfBirth.invalid && (registerForm.controls.dateOfBirth.dirty || registerForm.controls.dateOfBirth.touched)">
+                <div class="col-lg-4 col-xl-4 col-sm-4"></div>
+                <label class="col-sm-7 col-xl-7 col-sm-7" for="inputDateOfBirth" style="color: #f32020;"
+                       *ngIf="registerForm.controls.dateOfBirth.errors?.required">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  Vui lòng nhập ngày sinh.
+                </label>
+                <label class="col-sm-7 col-xl-7 col-sm-7" for="inputDateOfBirth" style="color: #f32020;"
+                       *ngIf="registerForm.controls.dateOfBirth.errors?.invalidAge">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  Ngày sinh phải từ 16 đến 100 tuổi.
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 row input-group">
+            <div class="col-lg-6 col-xl-6 col-sm-6">
+              <div class="row col-lg-12 col-xl-12 col-sm-12">
+                <label for="inputIdCard" class="col-sm-5 col-lg-5 col-xl-5 col-form-label required">CMND/CCCD</label>
+                <div class="col-sm-7 p-0 col-xl-7 col-sm-7">
+                  <input formControlName="idCard" type="text" class="form-control" style="width: 100%"
+                         id="inputIdCard"
+                         placeholder="9 hoặc 12 số">
+                </div>
+              </div>
+              <div class="row col-lg-12 col-xl-12 col-sm-12"
+                   *ngIf="registerForm.controls.idCard.invalid && (registerForm.controls.idCard.dirty || registerForm.controls.idCard.touched)">
+                <div class="col-lg-5 col-xl-5 col-sm-5"></div>
+                <label class="col-sm-7 col-xl-7 col-sm-7" for="inputIdCard" style="color: #f32020;"
+                       *ngIf="registerForm.controls.idCard.errors?.required">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  Vui lòng nhập CMND/CCCD.
+                </label>
+                <label class="col-sm-7 col-xl-7 col-sm-7" for="inputIdCard" style="color: #f32020;"
+                       *ngIf="registerForm.controls.idCard.errors?.pattern">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  CMND/CCCD phải đủ 9 hoặc 10 số.
+                </label>
+              </div>
+            </div>
+            <div class="col-lg-6 col-xl-6 col-sm-6">
+              <div class="row col-lg-12 col-xl-12 col-sm-12 p-0">
+                <label for="inputPhone" class="col-sm-4 col-lg-4 col-xl-4 col-form-label required">Số
+                  điện thoại</label>
+                <div class="p-0 col-sm-7 col-xl-7 col-sm-7">
+                  <input formControlName="phone" type="text" id="inputPhone" class="form-control"
+                         placeholder="VD. 0916123456">
+                </div>
+              </div>
+              <div class="row col-lg-12 col-xl-12 col-sm-12"
+                   *ngIf="registerForm.controls.phone.invalid && (registerForm.controls.phone.dirty || registerForm.controls.phone.touched)">
+                <div class="col-lg-5 col-xl-5 col-sm-5"></div>
+                <label class="col-sm-7 col-xl-7 col-sm-7" for="inputDateOfBirth" style="color: #f32020;"
+                       *ngIf="registerForm.controls.phone.errors?.required">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  Vui lòng nhập số điện thoại.
+                </label>
+                <label class="col-sm-7 col-xl-7 col-sm-7" for="inputDateOfBirth" style="color: #f32020;"
+                       *ngIf="registerForm.controls.phone.errors?.pattern">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  Số điện thoải phải đúng định dạng 10 số và bắt đầu là 090 hoặc 091.
+                </label>
+              </div>
+            </div>
+
+          </div>
+          <div class="mb-3 row input-group">
+            <div class="col-lg-6 col-xl-6 col-sm-6">
+              <div class="row col-lg-12 col-xl-12 col-sm-12">
+                <label for="inputUserName" class="col-sm-5 col-lg-5 col-xl-5 col-form-label required">Email</label>
+                <div class="col-lg-7 col-xl-7 p-0 col-sm-7">
+                  <input formControlName="email" type="text" class="form-control" style="width: 100%" id="email"
+                         placeholder="VD. abc@gmail.com" (keyup)="checkEmail($event)">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-xl-6 col-sm-6">
+              <div class="row">
+                <label class="col-lg-12 col-xl-12 col-sm-12 mt-2" for="inputUserName" style="color: #f32020;"
+                       *ngIf="checkExistEmail">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  Địa chỉ email đã tồn tại.
+                </label>
+              </div>
+              <div class="row"
+                   *ngIf="registerForm.controls.email.invalid && (registerForm.controls.email.dirty || registerForm.controls.email.touched)">
+                <label class="col-lg-12 col-xl-12 col-sm-12 mt-2" for="inputUserName" style="color: #f32020;"
+                       *ngIf="registerForm.controls.email.errors?.required">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  Vui lòng nhập địa chỉ email.
+                </label>
+                <label class="col-lg-12 col-xl-12 col-sm-12 mt-2" for="inputUserName" style="color: #f32020;"
+                       *ngIf="!registerForm.controls.email.errors?.email">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  Email phải đúng định dạng vd. abc@gmail.com.
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 row input-group">
+            <div class="col-lg-3 col-xl-3 col-sm-3" style="padding-right: 0; margin-right: -7.5%">
+              <div class="row col-lg-12 col-sm-12 col-xl-12">
+                <label class="col-lg-12 col-sm-12 col-xl-12 col-form-label">Địa chỉ</label>
+              </div>
+            </div>
+            <div class="col-lg-9 col-xl-9 col-sm-9" style="padding-right: 0">
+              <div class="row col-lg-12 col-sm-12 col-xl-12" style="padding-right: 0">
+                <div class="p-0 col-sm-4 col-xl-4 col-sm-4">
+                  <select formControlName="province" class="form-control" id="province" #province
+                          (change)="getAllDistrict(province.value)">
+                    <option selected value=" ">Thành Phố/Tỉnh</option>
+                    <option *ngFor="let p of provinces"
+                            [value]="p.province_name+'&'+p.province_id">{{p.province_name}}</option>
+                  </select>
+                </div>
+                <div class="col-sm-4 col-xl-4 col-sm-4" style=" padding-right: 0">
+                  <select formControlName="district" class="form-control" #district
+                          (change)="getAllWard(district.value)">
+                    <option selected value=" ">Quận/Huyện</option>
+                    <option *ngFor="let d of districts"
+                            [value]="d.district_name+'&'+d.district_id">{{d.district_name}}</option>
+                  </select>
+                </div>
+                <div class="col-sm-4 col-xl-4 col-sm-4" style=" padding-right: 0">
+                  <select formControlName="ward" class="form-control">
+                    <option selected value=" ">Phường/Xã</option>
+                    <option *ngFor="let w of wards" [value]="w.ward_name">{{w.ward_name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 row input-group">
+            <div class="col-lg-6 col-xl-6 col-sm-6">
+              <div class="row col-lg-12 col-xl-12 col-sm-12">
+                <label for="inputUserName" class="col-sm-5 col-lg-5 col-xl-5 col-form-label required">Tên
+                  đăng nhập</label>
+                <div class="col-lg-7 col-xl-7 p-0 col-sm-7">
+                  <input formControlName="userName" type="text" class="form-control" style="width: 100%"
+                         id="inputUserName"
+                         placeholder="VD. anguyen123"
+                         (keyup)="checkUser($event)">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-xl-6 col-sm-6">
+              <div class="row" *ngIf="checkUserName">
+                <label class="col-lg-12 col-xl-12 col-sm-12 mt-2" for="inputUserName" style="color: #f32020;"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  Tên đăng nhập đã tồn tại.
+                </label>
+              </div>
+              <div class="row"
+                   *ngIf="registerForm.controls.userName.invalid && (registerForm.controls.userName.dirty || registerForm.controls.userName.touched)">
+                <label class="col-lg-12 col-xl-12 col-sm-12 mt-2" for="inputUserName" style="color: #f32020;"
+                       *ngIf="registerForm.controls.userName.errors?.required">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  Vui lòng nhập tên đăng nhập.
+                </label>
+                <label class="col-lg-12 col-xl-12 col-sm-12 mt-2" for="inputUserName" style="color: #f32020;"
+                       *ngIf="!registerForm.controls.userName.errors?.required && (!registerForm.controls.userName.errors?.maxLength||!registerForm.controls.userName.errors?.minLength)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  Tên đăng nhập phải từ 4 đến 15 ký tự.
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 input-group">
+            <div class="col-sm-6 col-lg-6">
+              <div class="row col-lg-12 col-xl-12 col-sm-12">
+                <label for="inputPassword" class="col-sm-5 col-lg-5 col-form-label required">Mật
+                  khẩu</label>
+                <div class="col-sm-7 col-lg-7 p-0">
+                  <input formControlName="password" type="password" id="inputPassword" placeholder="VD. Abc@123"
+                         class="form-control">
+                </div>
+              </div>
+              <div class="row"
+                   *ngIf="registerForm.controls.password.invalid && (registerForm.controls.password.dirty || registerForm.controls.password.touched)">
+                <div class="col-sm-5 col-lg-5"></div>
+                <label class="col-lg-7 col-sm-7 p-0" for="inputPassword" style="color: #f32020;"
+                       *ngIf="registerForm.controls.password.errors?.required">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  Vui lòng nhập mật khẩu.
+                </label>
+                <label class="col-lg-7 col-sm-7 p-0" for="inputPassword" style="color: #f32020;"
+                       *ngIf="registerForm.controls.password.errors?.pattern && !registerForm.controls.password.errors?.required">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  Mật khẩu phải từ 8-15 ký tự bao gồm chữ cái, số, ký tự đặt biệt và một ký tự viết hoa.
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-6 col-lg-6 p-0">
+              <div class="row col-lg-12 col-xl-12 col-sm-12">
+                <label for="inputConfirmPassword" class="col-sm-4 col-form-label required">Xác nhận mật
+                  khẩu</label>
+                <div class="col-sm-7 col-lg-7 col-sm-7 p-0">
+                  <input formControlName="confirmPassword" type="password" id="inputConfirmPassword"
+                         placeholder="VD. Abc@123"
+                         class="form-control" width="100%">
+                </div>
+              </div>
+              <div class="row"
+                   *ngIf="registerForm.errors?.invalidPassword">
+                <div class="col-sm-4 col-lg-4"></div>
+                <label class="col-lg-7 col-sm-7 p-0" for="inputPassword" style="color: #f32020;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  Xác nhận mật khẩu không đúng.
+                </label>
+              </div>
+              <div class="row"
+                   *ngIf="registerForm.controls.confirmPassword.invalid && (registerForm.controls.confirmPassword.dirty || registerForm.controls.confirmPassword.touched)">
+                <div class="col-sm-4 col-lg-4"></div>
+                <label class="col-lg-7 col-sm-7 p-0" for="inputPassword" style="color: #f32020;"
+                       *ngIf="registerForm.controls.confirmPassword.errors?.required">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-exclamation-circle-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                  </svg>
+                  Vui lòng xác nhận mật khẩu.
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 mt-4 input-group">
+            <div class="col-lg-6 col-sm-6">
+              <div class="row">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                  <button class="btn btn-primary w-100" [disabled]="disable" type="submit">Đăng ký</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-sm-6">
+              <div class="row">
+                <div class="col-sm-4">
+                  <button class="btn btn-danger w-100" type="button" data-dismiss="modal">Hủy
+                  </button>
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-6"></div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

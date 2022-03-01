@@ -1,0 +1,26 @@
+<h2 class="text-center mb-3 mt-3">Chi tiết sử dụng dịch vụ</h2>
+<div class="m-3">
+    <table class="table table-bordered table-striped table-hover table-reponsive p-5">
+        <thead style="background: linear-gradient(19deg,#D9AFD9,#97D9E1)">
+            <tr>
+                <th scope="col" class="align-middle text-center">Tên dịch vụ</th>
+                <th scope="col" class="align-middle text-center">Số lượng</th>
+                <th scope="col" class="align-middle text-center">Đơn vị</th>
+                <th scope="col" class="align-middle text-center">Giá <br> (VNĐ)</th>
+                <th scope="col" class="align-middle text-center">Tổng tiền <br> (VNĐ)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let orderService of orderServices">
+                <td class="text-left">{{orderService.service.serviceName}}</td>
+                <td class="text-right">{{orderService.quantity}}</td>
+                <td class="text-left">{{orderService.service.unit}}</td>
+                <td class="text-right">{{orderService.service.prices}}</td>
+                <td class="text-right">{{orderService.totalMoney| currency:'VND':true}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-secondary mr-3 mt-2" mat-button (click)="onNoClick()">Thoát</button>
+    </div>
+</div>

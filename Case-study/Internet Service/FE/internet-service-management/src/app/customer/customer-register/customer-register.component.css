@@ -1,0 +1,33 @@
+
+h1{
+  font-size: 40px;
+}
+
+label{
+  padding: 0;
+}
+
+
+.input-group input{
+  border-radius:40px;
+  box-shadow: none !important;
+}
+
+.input-group select{
+  border-radius:40px;
+  box-shadow: none !important;
+}
+
+.img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.wrap-modal{
+  border-radius: 50px;
+}
+
+.required:after {
+  content:"*";color:red;font-size: 20px;
+}

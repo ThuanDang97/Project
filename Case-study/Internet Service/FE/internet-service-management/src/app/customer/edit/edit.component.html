@@ -1,0 +1,139 @@
+<div>
+  <div class="container mb-5 mt-5">
+    <div class="card row" style="border-color: white">
+      <div class="alert" role="alert" style="background: white; text-align: center">
+        <h1>Cập nhật khách hàng</h1>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="row mt-3">
+          <input type="hidden" readonly formControlName="customerId">
+        </div>
+        <div class="row mt-3">
+          <div class="col-6">
+            <label for="name">Họ tên <span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" id="name" formControlName="fullName">
+            <div class="alert alert-danger col-12 mt-1" *ngIf="form.get('fullName')?.invalid && form.get('fullName')?.touched &&
+             form.get('name')?.errors?.required">Họ tên không được để trống.</div>
+            <div class="alert alert-danger col-12 mt-1" *ngIf="form.get('fullName')?.invalid && form.get('fullName')?.dirty &&
+             form.get('name')?.errors?.pattern">Họ tên không đúng quy định.</div>
+          </div>
+          <div class="col-6">
+            <label for="username">Username<span class="text-danger"> *</span></label>
+            <input type="text" readonly class="form-control" id="username" formControlName="username">
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-6">
+            <label for="email">Email <span class="text-danger"> *</span></label>
+            <input type="text" class="form-control" id="email" placeholder="abc@example.com" formControlName="email">
+            <div class="alert alert-danger col-12 mt-2" *ngIf="form.get('email')?.invalid && form.get('email')?.touched &&
+             form.get('email')?.errors?.required">Email không được để trống.
+            </div>
+            <div class="alert alert-danger col-12 mt-2" *ngIf="form.get('name')?.invalid && form.get('email')?.dirty &&
+                       form.get('email')?.errors?.pattern">Email không đúng quy định.
+            </div>
+          </div>
+          <div class="col-6">
+            <label for="dateOfBirth">Ngày Sinh</label><span class="text-danger"> *</span>
+            <input type="date" class="form-control date" id="dateOfBirth" formControlName="dateOfBirth" >
+            <div class="alert alert-danger col-12 mt-2" *ngIf="form.get('dateOfBirth')?.invalid && form.get('dateOfBirth')?.touched &&
+             form.get('dateOfBirth')?.errors?.required">Ngày sinh không được để trống.
+            </div>
+            <div class="alert alert-danger col-12 mt-2" *ngIf="form.get('dateOfBirth')?.invalid && form.get('dateOfBirth')?.touched &&
+             form.get('dateOfBirth').hasError('invalidAge')">Tối thiểu 16 tuổi.
+            </div>
+            <div class="alert alert-danger col-12 mt-2" *ngIf="form.get('dateOfBirth')?.invalid && form.get('dateOfBirth')?.pristine &&
+             form.get('dateOfBirth').hasError('invalidAge')">Tối thiểu 16 tuổi.
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-3">
+            <label class="fontFamily">Địa chỉ</label>
+          </div>
+          <div class="col-3">
+            <select class="form-control" formControlName="province" id="province" (load)="getAllDistrict(province.value)" #province (change)="getAllDistrict(province.value)">
+<!--              <option hidden [value]="selectedProvinceName + '&' + selectedProvinceId">Thành phố/Tỉnh</option>-->
+              <option hidden value="">Thành phố/Tỉnh</option>
+              <option *ngFor="let p of provinces" [value]="p.province_name+'&'+p.province_id" >{{p.province_name}}</option>
+            </select>
+          </div>
+          <div class="col-3">
+            <select class="form-control" formControlName="district" id="district" (load)="getAllWard(district.value)" #district (change)="getAllWard(district.value)" >
+<!--              <option hidden [value]="selectedDistrictName + '&' + selectedDistrictId">Quận/Huyện</option>-->
+              <option hidden value="">Quận/Huyện</option>
+              <option *ngFor="let d of districts" [value]="d.district_name+'&'+d.district_id" >{{d.district_name}}</option>
+            </select>
+          </div>
+          <div class="col-3">
+            <select class="form-control" formControlName="commune" id="commune">
+              <option hidden value="">Phường/Xã</option>
+              <option *ngFor="let c of communes" [value]="c.ward_name + '&' + c.ward_id">{{c.ward_name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-6">
+            <label for="phone">Số điện thoại</label><span class="text-danger"> *</span>
+            <input type="text" class="form-control" id="phone" formControlName="phone" >
+            <div class="alert alert-danger col-12 mt-2" *ngIf="form.get('phone')?.invalid && form.get('phone')?.touched &&
+             form.get('phone')?.errors?.required">SĐT không được để trống.
+            </div>
+            <div class="alert alert-danger col-12 mt-2" *ngIf="form.get('phone')?.invalid && form.get('phone')?.dirty &&
+                       form.get('phone')?.errors?.pattern">SĐT phải có 10-12 số.
+            </div>
+          </div>
+          <div class="col-6">
+            <label for="status">Trạng thái</label><span class="text-danger"> *</span>
+            <select class="form-select w-100" aria-label="Default select example" id="status" style="height: 38px" formControlName="status" >
+              <option selected value="true">Doing</option>
+              <option value="false">Blocked</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-6">
+            <label for="password">Mật khẩu</label><span class="text-danger"> *</span>
+            <input type="password" class="form-control" id="password" formControlName="password" >
+            <div class="alert alert-danger col-12 mt-2" *ngIf=" form.get('password').dirty &&
+             form.get('password').hasError('required')">Password không được để trống.
+            </div>
+            <div class="alert alert-danger col-12 mt-2" *ngIf="form.get('password').touched &&
+                       form.get('password').hasError('pattern')">Password cần chứa 8-20 kí tự, tối thiểu 1 chữ viết hoa và 1 kí tự đặc biệt. </div>
+          </div>
+          <div class="col-6">
+            <label for="passwordRetype">Nhập lại mật khẩu</label><span class="text-danger"> *</span>
+            <input type="password" class="form-control" id="passwordRetype" formControlName="passwordRetype" >
+            <div class="alert alert-danger col-12 mt-2" *ngIf="form.get('passwordRetype').dirty &&
+             form.get('passwordRetype').hasError('required')">Nhập lại mật khẩu.
+            </div>
+            <div class="alert alert-danger col-12 mt-2"
+                 *ngIf="form.errors?.invalidPassword && form.get('passwordRetype').touched ">Mật khẩu nhập lại không khớp.
+            </div>
+          </div>
+        </div>
+        <div class="row m-3 justify-content-center">
+          <div class="col-3 text-center">
+            <button class="btn btn-primary" [disabled]="!form.valid" type="submit" >
+              Cập nhật
+            </button>
+            <label>&nbsp;</label>
+            <a class="btn btn-danger" routerLink="/customer">
+              Hủy
+            </a>
+          </div>
+        </div>
+        <div class="row mt-3 justify-content-center">
+          <div class="col-3 text-center">
+            <div *ngIf="editSuccess" class="alert alert-success box-msg " role="alert">
+              <strong>Chỉnh sửa thành công ✓</strong>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+</div>
+
